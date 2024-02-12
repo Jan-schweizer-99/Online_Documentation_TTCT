@@ -1,0 +1,35 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.button-container {
+    position: relative;
+}
+
+
+.background-image {
+    height: 50px; /* Passen Sie die Höhe nach Bedarf an */
+    width: 50px; /* Passen Sie die Breite nach Bedarf an */
+}
+
+button {
+    width: 0px;
+    height: 0px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    padding: 0;
+    position: absolute;
+    transform-origin: center;
+}
+
+
+button:nth-child(1) { transform: rotate(0deg) translate(0, -100px) rotate(0deg); }
+button:nth-child(2) { transform: rotate(72deg) translate(0, -100px) rotate(-72deg); }
+button:nth-child(3) { transform: rotate(144deg) translate(0, -100px) rotate(-144deg); }
+button:nth-child(4) { transform: rotate(216deg) translate(0, -100px) rotate(-216deg); }
+button:nth-child(5) { transform: rotate(288deg) translate(0, -100px) rotate(-288deg); }

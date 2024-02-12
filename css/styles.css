@@ -1,0 +1,112 @@
+/* style.css */
+body {
+    background-color: black;
+    margin: 0;
+    color: #fff;
+}
+
+#background-video {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    object-position: bottom;
+}
+
+.image {
+    height: 100vh;
+    width: 100vw;
+    object-fit: cover;
+    overflow: hidden;
+    transform: translate(0%, 100%);
+}
+
+#logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: 30%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+}
+
+#gear,
+#gear2,
+#gear3 {
+    transform-origin: center;
+    position: fixed;
+    height: auto;
+    width: auto;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    opacity: 0;
+}
+
+#gear {
+    top: 100%;
+    left: 250px;
+}
+
+#gear2 {
+    top: 100%;
+    left: 0px;
+}
+
+#gear3 {
+    bottom: 0px;
+    left: -90px;
+}
+
+#menu {
+    border-top-right-radius: 10%;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 30px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    background: linear-gradient(to bottom, #251705 0%, #3D2614 100%);
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #fff;
+    opacity: 1;
+}
+
+.corner {
+    width: 50px;
+    height: 30px;
+    position: absolute;
+    z-index: 9999;
+}
+
+#corner1 {
+    bottom: -2px;
+    left: -3px;
+    transform-origin: bottom right;
+}
+
+#corner2 {
+    top: -2px;
+    right: -3px;
+    transform-origin: top left;
+}
+
+#menu a {
+    color: #DE912F;
+    font-size: xx-large;
+    text-decoration: none;
+    font-family: 'Jokerman', sans-serif;
+}
+
+@font-face {
+    font-family: 'Jokerman';
+    src: url('jokerman.ttf') format('truetype');
+}

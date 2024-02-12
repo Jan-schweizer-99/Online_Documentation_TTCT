@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Deine Videospiel-Website</title>
+    <script type="text/javascript" src="js/lightbox-plus-jquery.min.js"></script>
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.51/build/spline-viewer.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/lightbox.min.css">
+
+    <style>
+        /* Hintergrundfarbe der Seite */
+        body {
+            background-color: black;
+            margin: 0;
+            color: #fff;
+        }
+        /* Definiere das Video als Hintergrund */
+        #background-video {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    object-position: bottom;
+}
+
+        .image {
+            height: 100vh;
+            width: 100%;
+            object-fit: cover; /* Behält Proportionen bei und füllt den gesamten Bereich */
+            overflow: hidden; /* Verhindert horizontales Scrollen */
+            transform: translate(0%, 100%);
+            z-index: -5;
+            -webkit-filter: blur(8px);
+            filter: blur(8px);
+            /* in der Mitte des Bildschirms positionieren */   
+        }
+        /* Definiere das Logo im Vordergrund */
+        #logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: auto;
+            height: 30%;
+            /* in der Mitte des Bildschirms positionieren */   
+            transform: translate(-50%, -50%);
+            margin: auto;
+        }
+        #gear {
+            transform-origin: center;
+            position: fixed;
+            top: 100%;
+            left: 250px;
+            height: 200px;
+            width: auto;
+            transform: translate(-50%, -50%);
+            margin: auto;
+            opacity: 0;
+        }
+        #gear2 {
+            transform-origin: center;
+            position: fixed;
+            top: 100%;
+            left: 0px;
+            height: 300px;
+            width: auto;
+            transform: translate(-50%, -50%);
+            margin: auto;
+            opacity: 0;
+        }
+        #gear3{
+            transform-origin: center;
+            position: fixed;
+            bottom: 0px;
+            left: -90px;
+            height: 260px;
+            width: auto;
+            transform: translate(-50%, -50%);
+            margin: auto;
+            opacity: 0;
+        }
+
+
+
+        /* Definiere die Menüleiste */
+        #menu {
+    border-top-right-radius: 10%;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 10%;
+    border-bottom-right-radius: 30px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    background: linear-gradient(to bottom, #251705 0%, #3D2614 100%);
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #fff;
+    opacity: 1;
+}
+
+
+        /* Definiere den Inhalt der Seite */
+        #content {
+            margin-top: 100vh; /* Verwende die volle Bildschirmhöhe als Abstand */
+            background-color: black; /* Schwarze Div-Box als Hintergrund */
+            z-index: 999;
+            font-size: larger;
+            color: #fff;
+            z-index: -100;
+            
+        }
+        .corner {
+    width: 50px;
+    height: 30px;
+    position: absolute;
+    z-index: 9999;
+}
+
+#corner1 {
+    bottom: -2px;
+    left: -3px;
+    transform-origin: bottom right;
+}
+
+#corner2 {
+    top: -2px;
+    right: -3px;
+    transform-origin: top left;
+}
+#menu a {
+  color: #de912f;
+  font-size: xx-large;
+  text-decoration: none;
+  font-family: 'Jokerman', sans-serif;
+}
+
+@font-face {
+  font-family: 'Jokerman';
+  src: url('jokerman.ttf') format('truetype');
+}
+
+
+.container {
+    position: relative;
+}
+
+.image-container {
+    position: relative;
+}
+
+.image-gallery {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 38%;
+    overflow: hidden;
+    z-index: 98; /* Set a slightly lower z-index than the iframe */
+}
+
+.imagegalleryimage {
+    position: relative;
+    float: right;
+    padding: 10px;
+    z-index: 100; /* Set a higher z-index for the images within the gallery */
+    border-radius: 10px;
+}
+.imagegalleryimage img {
+  /* Hier kannst du deine Stilregeln für das img-Element innerhalb der Klasse imagegalleryimage setzen */
+  border-radius: 10px;
+  /* Weitere Stilregeln... */
+}
+
+#d3 {
+    top: 100%;
+}
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Set the height of the container to 100% of the parent container */
+}
+.center-container-1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Set the height of the container to 100% of the parent container */
+}
+
+.scroll-box {
+    max-height: 80%; /* Set the maximum height as per your requirement */
+    overflow-y: auto; /* Enable vertical scrollbar if content exceeds the height */
+
+}
+/* Stil für den Scrollbalken */
+.scroll-box::-webkit-scrollbar {
+  width: 12px; /* Breite des Scrollbalkens */
+
+}
+
+.scroll-box::-webkit-scrollbar-thumb {
+  background-color: #de912f; /* Hintergrundfarbe des Scrollbalken-Thumb */
+  border-radius: 6px; /* Abgerundete Ecken für den Scrollbalken-Thumb */
+}
+
+.scroll-box::-webkit-scrollbar-track {
+  background-color: #f1f1f13f; /* Hintergrundfarbe des Scrollbalken-Tracks */
+  border-radius: 6px; /* Abgerundete Ecken für den Scrollbalken-Track */
+}
+.text-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 62%;
+    overflow: hidden;
+    z-index: 98; /* Set a slightly lower z-index than the iframe */
+    font-size: large;
+    text-decoration: none;
+    font-family: 'Jokerman', sans-serif;
+    z-index: 999;
+}
+.caption {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 62%;
+    overflow: hidden;
+    z-index: 98; /* Set a slightly lower z-index than the iframe */
+    color: #de912f;
+    font-size: xx-large;
+    text-decoration: none;
+    font-family: 'Jokerman', sans-serif;
+    z-index: 999;
+}
+p {
+    color: #ffffff;
+    font-size: large;
+    text-decoration: none;
+    font-family: 'Jokerman', sans-serif;
+    text-shadow: 0px 0px 6px #000000
+}
+h1 {
+    color: #de912f;
+    font-size: xx-large;
+    text-decoration: none;
+    font-family: 'Jokerman', sans-serif;
+    text-shadow: 0px 0px 6px #000000
+}
+h2 {
+    text-align: center;
+    color: #ffffff;
+    font-size: x-large;
+    text-decoration: none;
+    font-family: 'Jokerman', sans-serif;
+    text-shadow: 0px 0px 6px #000000
+}
+.textimage {
+    width: 30%; /* Das Bild füllt die gesamte Breite der Box aus */
+    height: auto; /* Das Seitenverhältnis des Bildes beibehalten */
+    display: block; /* Um mögliche Lücken zu vermeiden */
+            /* in der Mitte des Bildschirms positionieren */   
+        }
+        .image-box {
+    position: relative;
+    display: inline-block; /* Damit die Breite der Box sich an den Inhalt anpasst */
+    z-index: 99; /* Set a higher z-index to bring it to the foreground */
+}
+.text-field {
+    text-align: center;
+    position: absolute;
+    padding: 8px;
+    top: 150px;
+    left: 0;
+    width: 100%; /* Die Textbox nimmt die gesamte Breite der Bildbox ein */
+    height: 100%; /* Die Textbox nimmt die gesamte Höhe der Bildbox ein */
+    padding-top: 50px;
+    padding-left: 40px;
+    padding-right: 40px;
+    box-sizing: border-box; /* Das Padding wird in die Gesamtgröße der Box einbezogen */
+}
+.heading {
+    padding-left: 15%;
+    padding-right: 15%;
+}
+.lb-caption {
+    color: #ffffff;
+    font-size: xx-large;
+    text-decoration: none;
+    font-family: 'Jokerman', sans-serif;
+}
+.yt {
+    position: absolute;
+    width: 900px;
+    height: 506px;
+    left: 50%;
+    top: 150%;
+    transform: translate(-50%, -50%);
+    z-index: 99; /* Set a higher z-index to bring it to the foreground */
+}
+spline-viewer {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    left: 50%;
+    top: 150%;
+    transform: translate(-50%, -50%);
+    z-index: 99; /* Set a higher z-index to bring it to the foreground */
+}
+audio {
+      width: 305px;
+      height: 172px;
+      padding: 10px;
+      justify-content: center;
+    }
+    audio::-webkit-media-controls {
+      background-color: #00000000; /* Hintergrundfarbe der Bedienelemente in Webkit-Browsern (wie Chrome und Safari) */
+    }
+.fullcontainer {
+ height: 100vh;
+}
+
+    </style>
+</head>
+<body>
+    <!-- Hintergrundvideo -->
+    <div class="container">
+    <video id="background-video" autoplay loop muted style="z-index: -20;">
+        <source src="dein-video.mp4" type="video/mp4">
+        <!-- Füge alternative Formate hinzu, um die Kompatibilität zu erhöhen -->
+        <!--<source src="dein-video.webm" type="video/webm">-->
+    </video>
+    </div>
+
+    
+
+    <div class="container">
+        <div class="image-container" >
+        <img class="image" style="z-index: -8; position: relative;" src="images/Terry_Haus.png" alt="Images">
+        
+        <div class="text-container" id="DasProjekt">
+            <div class="fullcontainer">
+            <div class="center-container">
+            <div class="image-box">
+                <img class="Textimage" style="z-index: -9; " src="images/Textbackground.png" alt="Images">
+                <div class="text-field">
+                    <h1  class="Caption">Das Projekt</h1>
+                    <p class="heading">Erlebe 'Terry the Clumsy Trader', ein aufregendes Videospiel-Prototypenprojekt von Silvan Woshny und seinem 5-köpfigen Team an der Hochschule Furtwangen. Dieses Zelda-Spin-off entführt dich in eine bezaubernde Himmelwelt voller Rätsel und Kämpfe. Begleite Terry, den tollpatschigen Händler, durch eine offene Welt voller Überraschungen. Ein charismatisches Hochschulprojekt, das Kreativität und Spielspaß vereint</p>
+            </div>
+        </div>
+    </div>
+        </div>
+        </div>
+        <div class="image-gallery" id="d3">
+            <div class = "fullcontainer">
+            <div class="center-container">
+                <div class="scroll-box">
+                    <a class="imagegalleryimage" href="images/screenshots/ScreenShot00000.png" data-lightbox="Gallerie" data-title="Ugrade Insel 1"><img src="images/gallery_images/ScreenShot00000.png"></a>
+                    <a class="imagegalleryimage" href="images/screenshots/ScreenShot00001.png" data-lightbox="Gallerie" data-title="Pflanzen Topf"><img src="images/gallery_images/ScreenShot00001.png"></a>
+                    <a class="imagegalleryimage" href="images/screenshots/ScreenShot00002.png" data-lightbox="Gallerie" data-title="Höhle des Erwachens"><img src="images/gallery_images/ScreenShot00002.png"></a>
+                    <a class="imagegalleryimage" href="images/screenshots/ScreenShot00003.png" data-lightbox="Gallerie" data-title="Tutorial Insel"><img src="images/gallery_images/ScreenShot00003.png"></a>
+                    <a class="imagegalleryimage" href="images/screenshots/ScreenShot00004.png" data-lightbox="Gallerie" data-title="Bauern Insel"><img src="images/gallery_images/ScreenShot00004.png"></a>
+                    <a class="imagegalleryimage" href="images/screenshots/ScreenShot00005.png" data-lightbox="Gallerie" data-title="Sichelinsel"><img src="images/gallery_images/ScreenShot00005.png"></a>
+                    <a class="imagegalleryimage" href="images/screenshots/ScreenShot00006.png" data-lightbox="Gallerie" data-title="Palast"><img src="images/gallery_images/ScreenShot00006.png"></a>
+                    <a class="imagegalleryimage" href="images/screenshots/ScreenShot00007.png" data-lightbox="Gallerie" data-title="Himmel Welt"><img src="images/gallery_images/ScreenShot00007.png"></a>
+                    <a class="imagegalleryimage" href="images/screenshots/ScreenShot00008.png" data-lightbox="Gallerie" data-title="Japri"><img src="images/gallery_images/ScreenShot00008.png"></a>
+                    <a class="imagegalleryimage" href="images/screenshots/ScreenShot00009.png" data-lightbox="Gallerie" data-title="im Palast"><img src="images/gallery_images/ScreenShot00009.png"></a>
+                    <a class="imagegalleryimage" href="images/screenshots/ScreenShot00010.png" data-lightbox="Gallerie" data-title="Rätsel Upgrade"><img src="images/gallery_images/ScreenShot00010.png"></a>
+                    <a class="imagegalleryimage" href="images/screenshots/ScreenShot00011.png" data-lightbox="Gallerie" data-title="Rätsel Palast"><img src="images/gallery_images/ScreenShot00011.png"></a>
+                    <a class="imagegalleryimage" href="images/screenshots/ScreenShot00022.png" data-lightbox="Gallerie" data-title="Upgrade Insel 2"><img src="images/gallery_images/ScreenShot00022.png"></a>
+                    <a class="imagegalleryimage" href="images/screenshots/ScreenShot00012.png" data-lightbox="Gallerie" data-title="Turm-Insel"><img src="images/gallery_images/ScreenShot00012.png"></a>
+                    <a class="imagegalleryimage" href="images/screenshots/ScreenShot00013.png" data-lightbox="Gallerie" data-title="Ballon in Turm-Insel"><img src="images/gallery_images/ScreenShot00013.png"></a>
+                    <a class="imagegalleryimage" href="images/screenshots/ScreenShot00014.png" data-lightbox="Gallerie" data-title="Stage 1 Turminsel"><img src="images/gallery_images/ScreenShot00014.png"></a>
+                    <a class="imagegalleryimage" href="images/screenshots/ScreenShot00015.png" data-lightbox="Gallerie" data-title="Stage 2 Turminsel"><img src="images/gallery_images/ScreenShot00015.png"></a>
+                    <a class="imagegalleryimage" href="images/screenshots/ScreenShot00016.png" data-lightbox="Gallerie" data-title="Stage 3 Turminsel"><img src="images/gallery_images/ScreenShot00016.png"></a>
+                    <a class="imagegalleryimage" href="images/screenshots/ScreenShot00017.png" data-lightbox="Gallerie" data-title="Upgrade 3"><img src="images/gallery_images/ScreenShot00017.png"></a>
+                    <a class="imagegalleryimage" href="images/screenshots/ScreenShot00018.png" data-lightbox="Gallerie" data-title="Im Sturm"><img src="images/gallery_images/ScreenShot00018.png"></a>
+                    <a class="imagegalleryimage" href="images/screenshots/ScreenShot00019.png" data-lightbox="Gallerie" data-title="Der Sturm und die Sonne"><img src="images/gallery_images/ScreenShot00019.png"></a>
+                    <a class="imagegalleryimage" href="images/screenshots/ScreenShot00021.png" data-lightbox="Gallerie" data-title="Das Labor"><img src="images/gallery_images/ScreenShot00021.png"></a>
+                    <a class="imagegalleryimage" href="images/screenshots/ScreenShot00024.png" data-lightbox="Gallerie" data-title="Kampf-Insel"><img src="images/gallery_images/ScreenShot00024.png"></a>
+
+                    <!-- Add the rest of your imagegalleryimage elements here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    
+
+    
+    <div class="container">
+        <div class="image-container" >
+            <img class="image" src="images/Palast_1.png" alt="Images" style="z-index: -6;">
+            <iframe class="yt" width="1280" height="720 " style="position: absolute; z-index: 99;" src="https://www.youtube.com/embed/YFpn7k2JF80?si=cwCPcDKnQxnWC5yF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            
+        </div>
+    </div>
+    <div class="container">
+        <div class="image-container" >
+        <img class="image" id="DevMod" style="z-index: -8; position: relative;" src="images/screenshots/ScreenShot00012.png" alt="Images">
+        <div class="text-container" id="DasProjekt">
+            <div class="fullcontainer">
+
+
+            <div class="center-container">
+            <div class="image-box">
+                <img class="Textimage" style="z-index: -9; " src="images/Textbackground.png" alt="Images">
+                <div class="text-field">
+                    <h1  class="Caption">Development <br> und Modeling</h1>
+                    <p class="heading">Im Projekt 'Terry the Clumsy Trader' sind verschiedene Entwicklungsbereiche definiert. Effizienter Workflow für 3D-Assets, tiefes Verständnis der Unreal Engine für Feature-Implementation, reibungslose Funktionalität durch Blueprints, kreatives Game Design unter Zeitdruck und überraschend technische Visual-Effects-Arbeit. Diese Struktur ermöglicht gezieltes Arbeiten für ein termingerechtes, qualitativ hochwertiges Spiel.</p>
+                <br>
+                <p>~Silvan</p>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+        <div class="image-gallery" id="d3">
+            <div class="center-container-1">
+                <div class="scroll-box">
+                    <a class="imagegalleryimage" href="images/silvan/3DAssets.jpg" data-lightbox="Dev_Mod" data-title="3d Asset erstellung: Zeiteffektiven Worklow für Assetcreation finden, sodass die Assets immernoch eine gute
+                    Quali haben"><img src="images/silvan/3DAssets_small.jpg"></a>
+                    <a class="imagegalleryimage" href="images/silvan/ImplementationvonFeatures.jpg" data-lightbox="Dev_Mod" data-title="Implementation von Features: tiefgehendes verständniss über die Engine erhalten"><img src="images/silvan/ImplementationvonFeatures_small.jpg"></a>
+                    <a class="imagegalleryimage" href="images/silvan/Blueprints.jpg" data-lightbox="Dev_Mod" data-title="Blueprints: Logik/funktionsweise der Features"><img src="images/silvan/Blueprints_small.jpg"></a>
+                    <a class="imagegalleryimage" href="images/silvan/Gamedesign.jpg" data-lightbox="Dev_Mod" data-title="Game Design: Limitierung durch verfügbare Zeit"><img src="images/silvan/Gamedesign_small.jpg"></a>
+                    <a class="imagegalleryimage" href="images/silvan/VFX.jpg" data-lightbox="Dev_Mod" data-title="VFX: deutlich technischer als erwartet -> unerwartet viel mathematik"><img src="images/silvan/VFX_small.jpg"></a>
+                </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+        
+    </div>
+</div>
+    <div class="container">
+        <div class="image-container">
+            <img class="image" src="images/3D-Viewer.png" alt="Images" style="z-index: -6;">
+            <spline-viewer loading-anim-type="spinner-small-dark" url="https://prod.spline.design/gDTzqmdYo91NX6bM/scene.splinecode"></spline-viewer>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="image-container" >
+        <img class="image" id="DevMod" style="z-index: -8; position: relative;" src="images/screenshots/ScreenShot00012.png" alt="Images">
+        <div class="text-container" id="DasProjekt">
+            <div class="fullcontainer">
+
+
+            <div class="center-container">
+            <div class="image-box">
+                <img class="Textimage" style="z-index: -9; " src="images/Textbackground.png" alt="Images">
+                <div class="text-field">
+                    <h1  class="Caption">Level und<br>Narativ Design</h1>
+                    <p class="heading">
+                        
+
+                        Ich gestalte packende Dungeon-Blockouts mit ansprechenden Layouts und raffinierten Rätseln. Das Storydesign erfolgt auf Miro, wo die Gruppe den gesamten Spielablauf plant. Kurze, prägnante Dialoge vermitteln wichtige Infos, ohne den Spielfluss zu stören. Der Trailer betont die Höhepunkte des Spiels mit kreativer Musik und visuellen Elementen, und diese Erfahrungen zeigen die Wichtigkeit einer ganzheitlichen Herangehensweise für eine fesselnde Spielerfahrung.</p>
+                <br>
+                <p>~Cornelius</p>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+        <div class="image-gallery" id="d3">
+            <div class="center-container-1">
+                <div class="scroll-box">
+                    <a class="imagegalleryimage" href="images/Corni/Trailer.jpg" data-lightbox="lvlnrtv" data-title="Trailer: Schneiden des Trailers für das Spiel"><img src="images/Corni/Trailer_small.jpg"></a>
+                    <a class="imagegalleryimage" href="images/Corni/TeileSounddesign.jpg" data-lightbox="lvlnrtv" data-title="Teile des Sounddesgins: Ambiance und Foley Sounds raussuchen und zurechtschneiden, hier als Beispiel Schrittsounds"><img src="images/Corni/TeileSounddesign_small.jpg"></a>
+                    <a class="imagegalleryimage" href="images/Corni/Level_Design.jpg" data-lightbox="lvlnrtv" data-title="Level Design: Blockouts der Dungeons, hier als Beispiel der Turm"><img src="images/Corni/Level_Design_small.jpg"></a>
+                    <a class="imagegalleryimage" href="images/Corni/Dialoge.jpg" data-lightbox="lvlnrtv" data-title="Diagloge: Dialoge ausdenken, die nicht zu lang sind, aber trotzdem dem Spieler alles Wichtige erklären."><img src="images/Corni/Dialoge_small.jpg"></a>
+                    <a class="imagegalleryimage" href="images/Corni/Narrative_Design.jpg" data-lightbox="lvlnrtv" data-title="Narrative Design: Konzeption des Spielablaufs, Raussuchen von Referenzen"><img src="images/Corni/Narrative_Design_small.jpg"></a>
+
+
+                </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+        
+    </div>
+</div>
+    <div class="container">
+        <div class="image-container" >
+        <img class="image" id="sound" style="z-index: -8; position: relative;" src="images/screenshots/ScreenShot00012.png" alt="Images">
+        <div class="text-container" id="DasProjekt">
+            <div class="fullcontainer">
+
+
+            <div class="center-container">
+            <div class="image-box">
+                <img class="Textimage" style="z-index: -9; " src="images/Textbackground.png" alt="Images">
+                <div class="text-field">
+                    <h1  class="Caption">Audio</h1>
+                    <p class="heading">Während des Projekts habe ich gelernt, Musik für ein Videospiel zu schreiben. Worauf man beim komponieren solcher Musik achten muss, was für mich anfangs eine Herausforderung war, ist, dass ein Musikstück in Dauerschleife hörbar sein muss. Im Gegensatz zu vergangenen Kompositionen für Orchester- oder Filmprojekte, sind diese in sich kürzer und kompakter, müssen aber sowohl bei ain- als auch mehrmaligem Anhören vollkommen wirken.</p>
+                <br>
+                <p>~Richard</p>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+        <div class="image-gallery" id="d3">
+            <div class="center-container-1">
+                <div class="scroll-box">
+                    <div>
+                        <a class="imagegalleryimage" href="images/richard/Foleysammlung.jpg" data-lightbox="Audio" data-title="Foleys zusammensuchen und unter Umständen bearbeiten"><img src="images/richard/Foleysammlung_small.jpg"></a>
+                    </div>
+                    
+                <div>
+                    <h2>TCT-City Island Theme</h2>
+                    <br>
+                    <audio controls>
+                    <source src="audio/TTCT-City_Island_Theme.wav" type="audio/wav">
+                </audio>
+                    <a class="imagegalleryimage" href="pdf/City_Island_Theme.pdf" target="_blank">
+                        <img src="images/gallery_images/partiture.png">
+                    </a>
+                </div>
+                <div>
+                    <h2>TTCT-Cloud Travel</h2>
+                    <br>
+                    <audio controls>
+                    <source src="audio/TTCT-Cloud_Travel.wav" type="audio/wav">
+                </audio>
+                    <a class="imagegalleryimage" href="pdf/Cloud_Travel_Theme.pdf" target="_blank">
+                        <img src="images/gallery_images/partiture.png">
+                    </a>
+                </div>
+                <div>
+                    <h2>TTCT-Palace Theme</h2>
+                    <br>
+                    <audio controls>
+                    <source src="audio/TTCT-Palace_Theme.wav" type="audio/wav">
+                </audio>
+                    <a class="imagegalleryimage" href="pdf/Palace_Theme.pdf" target="_blank">
+                        <img src="images/gallery_images/partiture.png">
+                    </a>
+                </div>
+                <div>
+                    <h2>TTCT-Start Island</h2>
+                    <br>
+                    <audio controls>
+                    <source src="audio/TTCT-Start_Island.wav" type="audio/wav">
+                </audio>
+                    <a class="imagegalleryimage" href="pdf/Start_Island_Theme.pdf" target="_blank">
+                        <img src="images/gallery_images/partiture.png">
+                    </a>
+                </div>
+                <div>
+                    <h2>TTCT-Battle Theme</h2>
+                    <br>
+                    <audio controls>
+                    <source src="audio/TTCT-Battle_Theme.wav" type="audio/wav">
+                </audio>
+                </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+        
+    </div>
+</div>
+    <img class="image" src="images/Turorial.png" alt="Images" style="z-index: -500;" >
+    
+    </img>
+    <img class="image" src="images/Stadtinsel_2.png" alt="Images"></img>
+
+    
+
+    <!-- Logo -->
+    <img id="logo" src="logo_new.png" alt="Logo">
+    <img id="gear" src="images/gear.png" alt="Logo">
+    <img id="gear2" src="images/gear.png" alt="Logo">
+    <img id="gear3" src="images/gear.png" alt="Logo">
+    <!-- Menüleiste -->
+    <div id="menu">
+        <img class="corner" id="corner2" src="images/corner_2.png">
+        <!-- Füge hier deine Menüpunkte hinzu -->
+        <a href="#DasProjekt">Das Projekt</a>
+        <a> | </a>
+        <a href="#DevMod">Development und Modeling</a>
+        <a> | </a>
+        <a href="#lvlNrtv">Level/Narativ Designe</a>
+        <a> | </a>
+        <a href="#sound">Audio</a>
+        <a> | </a>
+        <a href="#">UI</a>
+
+        <img class="corner" id="corner1" src="images/Corner_1.png">
+    </div>
+
+    <!-- Inhalt der Seite -->
+    <div id="content" style="height: 0px;">
+        <!-- Füge hier den eigentlichen Inhalt deiner Seite ein -->
+        
+        <h1>Willkommen auf der Website deines Videospiels!</h1>
+
+    </div>
+    <script>
+        
+        // JavaScript-Code für das Animieren des Logos und das Überblenden des Videos
+        window.addEventListener("scroll", function() {
+            var scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+            var video = document.getElementById("background-video");
+            var logo = document.getElementById("logo");
+            var menu = document.getElementById("menu");
+            var gear = document.getElementById("gear");
+            var gear2 = document.getElementById("gear2");
+
+            /*disable gear*/
+
+            // Überblende das Video über die Div-Box beim Scrollen
+            video.style.top = -scrollPos + "px";
+
+            // Animiere das Logo zur linken oberen Ecke
+            if (scrollPos < 1000) {
+            logo.style.transform = "translate(-50%, -50%) scale(" + (1 - scrollPos/2000) + ")";
+            } else {
+                logo.style.transform = "translate(-50%, -50%) scale(0.5)";
+            }
+            video.style.opacity = 1 - (scrollPos/1000);
+            // Beispiel: Ändere die Transparenz des Logos beim Scrollen
+            //logo.style.opacity = 1 - (scrollPos/1000);
+            //gear.style.transform = "rotate(" + (scrollPos/10) + "deg)";
+            gear.style.transform = "translate(-50%, -50%) rotate(" + (scrollPos/10) + "deg)";
+            gear2.style.transform = "translate(-50%, -50%) rotate(" + (scrollPos/-10) + "deg)";
+            gear3.style.transform = "translate(-50%, -50%) rotate(" + (scrollPos/10) + "deg)";
+            console.log(scrollPos);
+/* transition gear opacity*/
+            if (scrollPos > 1000) {
+                gear.style.opacity = 1;
+                gear2.style.opacity = 1;
+                gear3.style.opacity = 1;
+                
+            } else {
+                gear.style.opacity = 1 * (scrollPos/1000);
+                gear2.style.opacity = 1 * (scrollPos/1000);
+                gear3.style.opacity = 1 * (scrollPos/1000);
+                
+            }
+            if (scrollPos > 1000) {
+                menu.style.opacity = 1;
+                
+                
+                
+            } else {
+                menu.style.opacity = 1 * (scrollPos/1000);
+
+                
+            }
+        });
+    </script>
+</body>
+</html>
