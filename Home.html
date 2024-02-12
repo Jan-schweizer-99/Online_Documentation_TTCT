@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Deine Videospiel-Website</title>
+    <title>TTCT</title>
     <script type="text/javascript" src="js/lightbox-plus-jquery.min.js"></script>
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.51/build/spline-viewer.js"></script>
     <link rel="stylesheet" type="text/css" href="css/lightbox.min.css">
@@ -27,17 +27,31 @@
     object-position: bottom;
 }
 
-        .image {
-            height: 100vh;
-            width: 100%;
-            object-fit: cover; /* Behält Proportionen bei und füllt den gesamten Bereich */
-            overflow: hidden; /* Verhindert horizontales Scrollen */
-            transform: translate(0%, 100%);
-            z-index: -5;
-            -webkit-filter: blur(8px);
-            filter: blur(8px);
-            /* in der Mitte des Bildschirms positionieren */   
-        }
+.image {
+    height: 100vh;
+    width: 100%;
+    object-fit: cover;
+    overflow: hidden;
+    transform: translate(0%, 100%);
+    z-index: -6;
+    -webkit-filter: blur(8px);
+    filter: blur(8px);
+}
+
+.image1-container {
+    bottom: 0;
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    transform: translate(0%, 100%);
+}
+
+.image1 {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
         /* Definiere das Logo im Vordergrund */
         #logo {
             position: absolute;
@@ -397,6 +411,9 @@ audio {
     <div class="container">
         <div class="image-container" >
             <img class="image" src="images/Palast_1.png" alt="Images" style="z-index: -6;">
+            <div class="image1-container" style="z-index: 1;">
+                <img class="image1" src="images/Trailer_vorground.png" alt="Images">
+            </div>
             <iframe class="yt" width="1280" height="720 " style="position: absolute; z-index: 99;" src="https://www.youtube.com/embed/YFpn7k2JF80?si=cwCPcDKnQxnWC5yF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             
         </div>
@@ -440,12 +457,15 @@ audio {
         
     </div>
 </div>
-    <div class="container">
-        <div class="image-container">
-            <img class="image" src="images/3D-Viewer.png" alt="Images" style="z-index: -6;">
-            <spline-viewer loading-anim-type="spinner-small-dark" url="https://prod.spline.design/gDTzqmdYo91NX6bM/scene.splinecode"></spline-viewer>
+<div class="container">
+    <div class="image-container">
+        <img class="image" src="images/3D-Viewer.png" alt="Images" style="z-index: -6;">
+        <div class="image1-container" style="z-index: 1;">
+            <img class="image1" src="images/3D-Viewer_vorground.png" alt="Images">
         </div>
+        <spline-viewer loading-anim-type="spinner-small-dark" url="https://prod.spline.design/gDTzqmdYo91NX6bM/scene.splinecode"></spline-viewer>
     </div>
+</div>
 
     <div class="container">
         <div class="image-container" >
