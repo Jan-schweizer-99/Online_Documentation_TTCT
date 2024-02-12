@@ -325,10 +325,8 @@ spline-viewer {
     z-index: 99; /* Set a higher z-index to bring it to the foreground */
 }
 audio {
-      width: 305px;
-      height: 172px;
+      width: 300px;
       padding: 10px;
-      justify-content: center;
     }
     audio::-webkit-media-controls {
       background-color: #00000000; /* Hintergrundfarbe der Bedienelemente in Webkit-Browsern (wie Chrome und Safari) */
@@ -336,6 +334,13 @@ audio {
 .fullcontainer {
  height: 100vh;
 }
+.theme-container {
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 10px;
+        width: 98%;
+        text-align: center;
+    }
 
     </style>
 </head>
@@ -488,11 +493,11 @@ audio {
     <div class="image-gallery" id="d3">
         <div class="center-container">
             <div class="scroll-box">
-                <a class="imagegalleryimage" href="images/nico/Blueprints.png" data-lightbox="Dev_src" data-title=""><img src="images/nico/Blueprints_small.png"></a>
-                <a class="imagegalleryimage" href="images/nico/cppbase.png" data-lightbox="Dev_src" data-title=""><img src="images/nico/cppbase_small.png"></a>
-                <a class="imagegalleryimage" href="images/nico/Datenbanken.png" data-lightbox="Dev_src" data-title=""><img src="images/nico/Datenbanken_small.png"></a>
-                <a class="imagegalleryimage" href="images/nico/GitHub_Setup.png" data-lightbox="Dev_src" data-title=""><img src="images/nico/GitHub_Setup_small.png"></a>
-                <a class="imagegalleryimage" href="images/nico/Widget_Blueprints.png" data-lightbox="Dev_src" data-title=""><img src="images/nico/Widget_Blueprints_small.png"></a>
+                <a class="imagegalleryimage" href="images/nico/Blueprints.png" data-lightbox="Dev_src" data-title="C++ (Base): C++ Syntax / Pointer"><img src="images/nico/Blueprints_small.png"></a>
+                <a class="imagegalleryimage" href="images/nico/cppbase.png" data-lightbox="Dev_src" data-title="Blueprints (Inventarsystem): Node basiertes Programmieren"><img src="images/nico/cppbase_small.png"></a>
+                <a class="imagegalleryimage" href="images/nico/Datenbanken.png" data-lightbox="Dev_src" data-title="Datenbanken (Items): Vernetzung verschiedener Datenstrukturen"><img src="images/nico/Datenbanken_small.png"></a>
+                <a class="imagegalleryimage" href="images/nico/GitHub_Setup.png" data-lightbox="Dev_src" data-title="GitHub Setup: Aufsetzen der Shared Workspaces & der .Gitignore Datei"><img src="images/nico/GitHub_Setup_small.png"></a>
+                <a class="imagegalleryimage" href="images/nico/Widget_Blueprints.png" data-lightbox="Dev_src" data-title="Widget Blueprints (Inventory System): Implementierung von Inventar bezogenen Widgets"><img src="images/nico/Widget_Blueprints_small.png"></a>
             </div>
             </div>
         </div>
@@ -568,53 +573,58 @@ audio {
                         <a class="imagegalleryimage" href="images/richard/Foleysammlung.jpg" data-lightbox="Audio" data-title="Foleys zusammensuchen und unter Umständen bearbeiten"><img src="images/richard/Foleysammlung_small.jpg"></a>
                     </div>
                     
-                <div>
-                    <h2>TCT-City Island Theme</h2>
-                    <br>
-                    <audio controls>
-                    <source src="audio/TTCT-City_Island_Theme.wav" type="audio/wav">
-                </audio>
-                    <a class="imagegalleryimage" href="pdf/City_Island_Theme.pdf" target="_blank">
-                        <img src="images/gallery_images/partiture.png">
-                    </a>
-                </div>
-                <div>
-                    <h2>TTCT-Cloud Travel</h2>
-                    <br>
-                    <audio controls>
-                    <source src="audio/TTCT-Cloud_Travel.wav" type="audio/wav">
-                </audio>
-                    <a class="imagegalleryimage" href="pdf/Cloud_Travel_Theme.pdf" target="_blank">
-                        <img src="images/gallery_images/partiture.png">
-                    </a>
-                </div>
-                <div>
-                    <h2>TTCT-Palace Theme</h2>
-                    <br>
-                    <audio controls>
-                    <source src="audio/TTCT-Palace_Theme.wav" type="audio/wav">
-                </audio>
-                    <a class="imagegalleryimage" href="pdf/Palace_Theme.pdf" target="_blank">
-                        <img src="images/gallery_images/partiture.png">
-                    </a>
-                </div>
-                <div>
-                    <h2>TTCT-Start Island</h2>
-                    <br>
-                    <audio controls>
-                    <source src="audio/TTCT-Start_Island.wav" type="audio/wav">
-                </audio>
-                    <a class="imagegalleryimage" href="pdf/Start_Island_Theme.pdf" target="_blank">
-                        <img src="images/gallery_images/partiture.png">
-                    </a>
-                </div>
-                <div>
-                    <h2>TTCT-Battle Theme</h2>
-                    <br>
-                    <audio controls>
-                    <source src="audio/TTCT-Battle_Theme.wav" type="audio/wav">
-                </audio>
-                </div>
+                    <div class="theme-container">
+                        <h2>TCT-City Island Theme</h2>
+                        <br>
+                        <audio controls>
+                            <source src="audio/TTCT-City_Island_Theme.wav" type="audio/wav">
+                        </audio>
+                        <a class="imagegalleryimage" href="pdf/City_Island_Theme.pdf" target="_blank">
+                            <img src="images/richard/CityPartiture.png">
+                        </a>
+                    </div>
+                    
+                    <div class="theme-container">
+                        <h2>TTCT-Cloud Travel</h2>
+                        <br>
+                        <audio controls>
+                            <source src="audio/TTCT-Cloud_Travel.wav" type="audio/wav">
+                        </audio>
+                        <a class="imagegalleryimage" href="pdf/Cloud_Travel_Theme.pdf" target="_blank">
+                            <img src="images/richard/HimmelPartiture.png">
+                        </a>
+                    </div>
+                    
+                    <div class="theme-container">
+                        <h2>TTCT-Palace Theme</h2>
+                        <br>
+                        <audio controls>
+                            <source src="audio/TTCT-Palace_Theme.wav" type="audio/wav">
+                        </audio>
+                        <a class="imagegalleryimage" href="pdf/Palace_Theme.pdf" target="_blank">
+                            <img src="images/richard/palace_Partiture.png">
+                        </a>
+                    </div>
+                    
+                    <div class="theme-container">
+                        <h2>TTCT-Start Island</h2>
+                        <br>
+                        <audio controls>
+                            <source src="audio/TTCT-Start_Island.wav" type="audio/wav">
+                        </audio>
+                        <a class="imagegalleryimage" href="pdf/Start_Island_Theme.pdf" target="_blank">
+                            <img src="images/richard/StartPartiture.png">
+                        </a>
+                    </div>
+                    
+                    <div class="theme-container">
+                        <h2>TTCT-Battle Theme</h2>
+                        <br>
+                        <audio controls>
+                            <source src="audio/TTCT-Battle_Theme.wav" type="audio/wav">
+                        </audio>
+                    </div>
+                    
                 </div>
             </div>
         </div>
