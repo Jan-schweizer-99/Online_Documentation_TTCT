@@ -179,7 +179,7 @@
 }
 
 .imagegalleryimage {
-    position: relative;
+    position: static;
     float: right;
     padding: 10px;
     z-index: 100; /* Set a higher z-index for the images within the gallery */
@@ -195,17 +195,15 @@
     top: 100%;
 }
 .center-container {
+    padding-right: 5%;
     display: flex;
+    flex-wrap: nowrap; /* Erlaubt Zeilenumbruch innerhalb von .center-container */
     justify-content: center;
     align-items: center;
-    height: 100%; /* Set the height of the container to 100% of the parent container */
+    height: 100%; /* Setzen Sie die Höhe auf 100% für den Elterncontainer, wenn erforderlich */
+    box-sizing: border-box; /* Hinzufügen Sie diese Eigenschaft, um sicherzustellen, dass Padding und Border in der Berechnung enthalten sind */
 }
-.center-container-1 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%; /* Set the height of the container to 100% of the parent container */
-}
+
 
 .scroll-box {
     max-height: 80%; /* Set the maximum height as per your requirement */
@@ -448,7 +446,7 @@ audio {
         </div>
         </div>
         <div class="image-gallery" id="d3">
-            <div class="center-container-1">
+            <div class="center-container">
                 <div class="scroll-box">
                     <a class="imagegalleryimage" href="images/silvan/3DAssets.jpg" data-lightbox="Dev_Mod" data-title="3d Asset erstellung: Zeiteffektiven Worklow für Assetcreation finden, sodass die Assets immernoch eine gute
                     Quali haben"><img src="images/silvan/3DAssets_small.jpg"></a>
@@ -469,7 +467,7 @@ audio {
 
 <div class="container">
     <div class="image-container" >
-    <img class="image" id="DevMod" style="z-index: -8; position: relative;" src="images/screenshots/ScreenShot00014.png" alt="Images">
+    <img class="image" id="Devsrc" style="z-index: -8; position: relative;" src="images/screenshots/ScreenShot00014.png" alt="Images">
     <div class="text-container" id="DasProjekt">
         <div class="fullcontainer">
 
@@ -488,7 +486,7 @@ audio {
     </div>
     </div>
     <div class="image-gallery" id="d3">
-        <div class="center-container-1">
+        <div class="center-container">
             <div class="scroll-box">
                 <a class="imagegalleryimage" href="images/nico/Blueprints.png" data-lightbox="Dev_src" data-title=""><img src="images/nico/Blueprints_small.png"></a>
                 <a class="imagegalleryimage" href="images/nico/cppbase.png" data-lightbox="Dev_src" data-title=""><img src="images/nico/cppbase_small.png"></a>
@@ -526,7 +524,7 @@ audio {
         </div>
         </div>
         <div class="image-gallery" id="d3">
-            <div class="center-container-1">
+            <div class="center-container">
                 <div class="scroll-box">
                     <a class="imagegalleryimage" href="images/Corni/Trailer.jpg" data-lightbox="lvlnrtv" data-title="Trailer: Schneiden des Trailers für das Spiel"><img src="images/Corni/Trailer_small.jpg"></a>
                     <a class="imagegalleryimage" href="images/Corni/TeileSounddesign.jpg" data-lightbox="lvlnrtv" data-title="Teile des Sounddesgins: Ambiance und Foley Sounds raussuchen und zurechtschneiden, hier als Beispiel Schrittsounds"><img src="images/Corni/TeileSounddesign_small.jpg"></a>
@@ -564,7 +562,7 @@ audio {
         </div>
         </div>
         <div class="image-gallery" id="d3">
-            <div class="center-container-1">
+            <div class="center-container">
                 <div class="scroll-box">
                     <div>
                         <a class="imagegalleryimage" href="images/richard/Foleysammlung.jpg" data-lightbox="Audio" data-title="Foleys zusammensuchen und unter Umständen bearbeiten"><img src="images/richard/Foleysammlung_small.jpg"></a>
@@ -648,7 +646,7 @@ audio {
     </div>
     </div>
     <div class="image-gallery" id="d3">
-        <div class="center-container-1">
+        <div class="center-container">
             <div class="scroll-box">
                 <a class="imagegalleryimage" href="images/Jan/Bug_1.png" data-lightbox="UI" data-title="Käferanzeige 1"><img src="images/Jan/Bug_1_small.png"></a>
                 <a class="imagegalleryimage" href="images/Jan/Bug_2.png" data-lightbox="UI" data-title="Käferanzeige 2"><img src="images/Jan/Bug_2_small.png"></a>
@@ -657,6 +655,7 @@ audio {
                 <a class="imagegalleryimage" href="images/Jan/Finales_Menü_UI.png" data-lightbox="UI" data-title="Finale Menü UI"><img src="images/Jan/Finales_Menü_UI_small.png"></a>
                 <a class="imagegalleryimage" href="images/Jan/Illustrator.png" data-lightbox="UI" data-title="Arbeit in Illustrator"><img src="images/Jan/Illustrator_small.png"></a>
                 <a class="imagegalleryimage" href="images/Jan/Projektdoku.png" data-lightbox="UI" data-title="Projektdoku mit HTML CSS und js"><img src="images/Jan/Projektdoku_small.png"></a>
+            
             </div>
             </div>
         </div>
@@ -676,7 +675,7 @@ audio {
         <a> | </a>
         <a href="#DevMod">Silvan</a>
         <a> | </a>
-        <a href="#Devsource">Nico</a>
+        <a href="#Devsrc">Nico</a>
         <a> | </a>
         <a href="#lvlNrtv">Cornelius</a>
         <a> | </a>
